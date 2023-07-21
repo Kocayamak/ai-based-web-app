@@ -3,14 +3,29 @@ import React, { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { copy, linkIcon, loader, tick } from "../assets";
 
+import { useLazyGetSummaryQuery } from "../services/article";
+
 const Demo = () => {
   const [article, setArticle] = useState({
     url: "",
     summary: "",
   });
 
+  // eslint-disable-next-line no-unused-vars
+  const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
+
   const handleSubmit = async (e) => {
-    alert("Link kısaltılıyor..." , e);
+    e.preventDefault();
+
+    const { data } = await getSummary({ articleUrl: article.url });
+    console.log(data)
+    if (data?.summary) {
+      const newArticle = { ...article, summary: data.summary };
+
+      setArticle(newArticle);
+
+      console.log(newArticle);
+    }
   };
 
   return (
