@@ -4,6 +4,7 @@ import React from 'react'
 import Hero from './components/Hero'
 // eslint-disable-next-line no-unused-vars
 import Demo from './components/Demo'
+import './App.css'
 
 const App = () => {
   return (
